@@ -29,6 +29,30 @@ const DiagramsPage = () => {
     }
   };
 
+  const handleDownload = async () => {
+    if (!imageUrl) return;
+    try {
+      const response = await fetch(imageUrl);
+      const blob = await response.blob();
+      const url = window.URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = `stem-diagram-${Date.now()}.png`;
+      document.body.appendChild(a);
+      a.click();
+      window.URL.revokeObjectURL(url);
+      document.body.removeChild(a);
+    } catch (err) {
+      console.error('Download failed:', err);
+    }
+  };
+
+  const handleFullscreen = () => {
+    if (imageUrl) {
+      window.open(imageUrl, '_blank');
+    }
+  };
+
   return (
     <Layout>
       <div className="max-w-5xl mx-auto space-y-8 pb-20">
@@ -86,8 +110,18 @@ const DiagramsPage = () => {
                   )}
                 </h2>
                 <div className="flex gap-2">
-                  <button className="p-3 bg-secondary rounded-xl hover:bg-secondary/80 transition shadow-sm border border-border/50"><Download className="w-5 h-5" /></button>
-                  <button className="p-3 bg-secondary rounded-xl hover:bg-secondary/80 transition shadow-sm border border-border/50"><Maximize2 className="w-5 h-5" /></button>
+                  <button 
+                    onClick={handleDownload}
+                    className="p-3 bg-secondary rounded-xl hover:bg-secondary/80 transition shadow-sm border border-border/50"
+                  >
+                    <Download className="w-5 h-5" />
+                  </button>
+                  <button 
+                    onClick={handleFullscreen}
+                    className="p-3 bg-secondary rounded-xl hover:bg-secondary/80 transition shadow-sm border border-border/50"
+                  >
+                    <Maximize2 className="w-5 h-5" />
+                  </button>
                 </div>
               </div>
 
@@ -102,6 +136,7 @@ const DiagramsPage = () => {
             </motion.div>
           )}
         </AnimatePresence>
+
       </div>
     </Layout>
   );

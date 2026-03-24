@@ -125,14 +125,61 @@ const LandingPage = () => {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.4 }}
-            className="flex flex-col sm:flex-row gap-6"
+            className="flex flex-col sm:flex-row gap-6 mb-32"
           >
             <Link to="/auth" className="group px-12 py-5 rounded-[2rem] bg-primary text-primary-foreground font-black text-xl flex items-center gap-4 hover:scale-110 active:scale-95 transition-all shadow-2xl shadow-primary/40">
               Start Solving
               <ArrowRight className="w-6 h-6 group-hover:translate-x-2 transition-transform" />
             </Link>
           </motion.div>
+
+          {/* New Workflow Architecture Section */}
+          <section className="w-full max-w-6xl mx-auto py-24 px-8 bg-card/20 glass border border-border/50 rounded-[4rem] relative overflow-hidden mb-40">
+            <div className="absolute top-0 right-0 w-96 h-96 bg-primary/10 rounded-full blur-[100px] -translate-y-1/2 translate-x-1/2 opacity-30" />
+            <div className="absolute bottom-0 left-0 w-96 h-96 bg-primary/5 rounded-full blur-[100px] translate-y-1/2 -translate-x-1/2 opacity-30" />
+            
+            <div className="text-center mb-20">
+               <span className="text-xs font-black uppercase tracking-[0.4em] text-primary mb-4 block underline underline-offset-8 decoration-2 opacity-50">System Architecture</span>
+               <h3 className="text-5xl font-black tracking-tighter">Elite Processing Flow</h3>
+               <p className="text-muted-foreground text-lg mt-4 max-w-2xl mx-auto font-medium">How we turn complex math into instant mastery in 1.4 seconds.</p>
+            </div>
+
+            <div className="grid grid-cols-1 md:grid-cols-4 gap-12 relative">
+               {/* Vertical Connecting Lines for Mobile, Horizontal for Desktop */}
+               <div className="hidden md:block absolute top-12 left-24 right-24 h-0.5 bg-gradient-to-r from-primary/5 via-primary/40 to-primary/5 z-0" />
+               
+               <WorkflowStep 
+                 num="01" 
+                 icon={Camera} 
+                 title="Input Capture" 
+                 desc="Ultra-High Precision OCR extracts handwritten math & STEM text." 
+                 color="text-blue-500"
+               />
+               <WorkflowStep 
+                 num="02" 
+                 icon={Zap} 
+                 title="AI Logic Trace" 
+                 desc="Groq Llama 3 executes Chain-of-Thought reasoning steps." 
+                 color="text-violet-500"
+               />
+               <WorkflowStep 
+                 num="03" 
+                 icon={BarChart3} 
+                 title="Visual Blueprint" 
+                 desc="QuickChart renders interactive dynamic diagrams instantly." 
+                 color="text-orange-500"
+               />
+               <WorkflowStep 
+                 num="04" 
+                 icon={Award} 
+                 title="Mastery Gain" 
+                 desc="XP points added and concepts updated in your profile." 
+                 color="text-emerald-500"
+               />
+            </div>
+          </section>
         </div>
+
 
         {/* The 100 Features Grid moved from Dashboard */}
         <div className="space-y-20">
@@ -170,6 +217,22 @@ const LandingPage = () => {
   );
 };
 
+const WorkflowStep = ({ num, icon: Icon, title, desc, color }: any) => (
+  <motion.div 
+    initial={{ opacity: 0, scale: 0.9 }}
+    whileInView={{ opacity: 1, scale: 1 }}
+    viewport={{ once: true }}
+    className="flex flex-col items-center text-center relative z-10 group"
+  >
+    <div className={`w-24 h-24 rounded-[2rem] bg-card border border-border/50 flex items-center justify-center mb-6 shadow-2xl relative group-hover:border-primary/50 transition-all duration-500`}>
+       <div className="absolute -top-3 -right-3 w-10 h-10 bg-primary rounded-full flex items-center justify-center text-[10px] font-black text-primary-foreground shadow-lg">{num}</div>
+       <Icon className={`w-10 h-10 ${color} group-hover:scale-110 transition-transform duration-500`} />
+    </div>
+    <h4 className="text-xl font-black mb-2 tracking-tight group-hover:text-primary transition-colors">{title}</h4>
+    <p className="text-xs text-muted-foreground font-medium leading-relaxed max-w-[180px]">{desc}</p>
+  </motion.div>
+);
+
 const FeatureCategoryCard = ({ category: cat, index }: any) => (
   <motion.div 
     variants={{
@@ -206,3 +269,5 @@ const FeatureCategoryCard = ({ category: cat, index }: any) => (
 );
 
 export default LandingPage;
+
+
