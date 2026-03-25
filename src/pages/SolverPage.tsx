@@ -49,9 +49,12 @@ const SolverPage = () => {
         setXp(prev => prev + data.xp_earned);
         if (data.levels_up) setLevel(l => l + 1);
       }
-    } catch (err) {
+    } catch (err: any) {
       console.error(err);
-      setSolution('An error occurred while generating the solution. Please try again.');
+      const detail = err?.response?.data?.detail;
+      setSolution(detail
+        ? `⚠️ **Error:** ${detail}`
+        : '⚠️ **Error:** Something went wrong. Please try again or use a clearer image.');
     } finally {
       setLoading(false);
     }
