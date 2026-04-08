@@ -53,8 +53,8 @@ const SolverPage = () => {
       console.error(err);
       const detail = err?.response?.data?.detail;
       setSolution(detail
-        ? `⚠️ **Error:** ${detail}`
-        : '⚠️ **Error:** Something went wrong. Please try again or use a clearer image.');
+        ? `Error: ${detail}`
+        : 'Error: Something went wrong. Please try again or use a clearer image.');
     } finally {
       setLoading(false);
     }
@@ -130,7 +130,7 @@ const SolverPage = () => {
                 <textarea 
                   value={textInput}
                   onChange={(e) => setTextInput(e.target.value)}
-                  placeholder="e.g. Find the derivative of f(x) = x³ * ln(x)"
+                  placeholder="e.g. Find the derivative of f(x) = x^3 * ln(x)"
                   className="w-full h-48 px-6 py-5 bg-background/50 border border-border/50 rounded-3xl focus:outline-none focus:ring-4 focus:ring-primary/20 transition-all resize-none font-medium placeholder:text-muted-foreground/50 text-lg"
                 />
               </motion.div>

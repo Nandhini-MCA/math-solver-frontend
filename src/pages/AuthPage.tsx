@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { api } from '../services/api';
 import { useNavigate, useLocation } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
+import { Sparkles } from 'lucide-react';
 
 // Google OAuth2 config – uses Authorization Code flow (no GIS library needed)
 const GOOGLE_CLIENT_ID = "571057490382-334qvlsqsb4vi7n1ppbcssma075eeeiu.apps.googleusercontent.com";
@@ -100,7 +101,7 @@ const AuthPage = () => {
               transition={{ delay: 0.2, type: 'spring' }}
               className="w-16 h-16 bg-primary rounded-2xl flex items-center justify-center shadow-lg shadow-primary/30 mb-4"
             >
-              <span className="text-3xl">🚀</span>
+              <Sparkles className="w-8 h-8 text-primary-foreground" />
             </motion.div>
             <h2 className="text-3xl font-bold text-center tracking-tight">
               {isLogin ? 'Welcome Back' : 'Create Account'}
